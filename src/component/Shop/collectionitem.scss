@@ -1,0 +1,49 @@
+.collection-item{
+    width: 22%;
+    height: 300px;
+    display: flex;
+    flex: 1;
+    flex-direction:column;
+    align-items: center;
+    margin-top: 15px;
+    position: relative;
+    &:hover{
+        cursor: pointer;
+        & .background-image{
+            opacity:0.9;
+        }
+        & .content{
+            display: flex;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            opacity:0.6;
+        }
+    }
+    &:not(:last-child){
+        margin-right: 20px;
+    }
+}
+
+.background-image{
+    width:100%;
+    height: 90%;
+    background-size: cover;
+    background-position: center;
+}
+
+.content{
+    display:none;
+    height:15%;
+    width: 50%;
+    position: absolute;
+    border: 1px solid black;
+    top:60%;
+}
+.detail{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}

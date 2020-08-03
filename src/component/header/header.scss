@@ -1,0 +1,19 @@
+.header{
+    width:100%;
+    display: flex;
+    justify-content: space-between;
+}
+.options{
+    display:flex;
+    align-items: center;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+.option{
+    justify-content: flex-end;
+    margin-left: 10px;
+    cursor: pointer;
+}
+.option:nth-last-child(2){
+    margin-right: 10px;
+}

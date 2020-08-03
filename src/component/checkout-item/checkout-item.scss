@@ -1,0 +1,32 @@
+.checkout-item {
+    width: 60%;
+    display: flex;
+    min-height: 100px;
+    border-bottom: 1px solid darkgrey;
+    padding: 15px 0;
+    font-size: 20px;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+}
+.image,
+.name,
+.quantity,
+.price,
+.remove-button
+{
+  width: 20%;
+}
+.name{
+  padding-left: 5px;
+}
+.arrow,
+.remove-button{
+  cursor: pointer;
+}
+.arrow:first-child{
+  padding-right: 5px;
+}
+.arrow:last-child{
+  padding-left: 5px;
+}
