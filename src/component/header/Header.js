@@ -16,7 +16,6 @@ const Header=({currentUser,hidden})=>{
         showDropDownBool?inputEl.current.style.visibility="hidden":inputEl.current.style.visibility="visible";
         showDropDownBool=!showDropDownBool;
     }*/
-    console.log(currentUser)
     return(
         <div className="header">
             <Link to="/" className="logo">
@@ -27,7 +26,7 @@ const Header=({currentUser,hidden})=>{
                     SHOP
                 </Link>
                 <Link to='/' className="option"> 
-                    CONTACT
+                    CONTA
                 </Link>
                 {
                     currentUser?
