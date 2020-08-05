@@ -3,7 +3,7 @@ import './homepage.scss';
 import Menu from '../../component/menu/Menu'
 
 const HomePage = (props) =>{
-    console.log(props.match)
+   // console.log(props.match)
     return (
     <div className="homepage">
         <Menu />
