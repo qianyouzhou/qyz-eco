@@ -28,15 +28,15 @@ const Header=({currentUser,hidden})=>{
                 <Link to='/' className="option"> 
                     CONTACT
                 </Link>
-                {
-                    currentUser?
-                    (<Link to='/signin' className="option"> 
+                {currentUser ? (
+                    <Link className='option' to='/signin'>
                     SIGN IN
-                    </Link>)
-                    :
-                    (<div className="option" onClick={()=>auth.signOut()}>SIGN OUT</div>)
-                    
-                }
+                    </Link>
+                ) : (
+                    <div className='option' onClick={() => auth.signOut()}>
+                    SIGN OUT
+                    </div>
+                )}
                 <CartIcon className="option"/>
             </div>
             {/*<CartDropDown ref={inputEl}></CartDropDown>*/}

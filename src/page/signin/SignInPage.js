@@ -2,13 +2,13 @@ import React from 'react';
 
 import "./signinpage.scss";
 import SignIn from "../../component/sign-in/SignIn";
-import SignOut from "../../component/sign-in/SignOut"
+import SignUp from "../../component/sign-in/SignUp"
 
 const SignInPage = ()=>{
     return(
         <div className="signin-page">
             <SignIn />
-            <SignOut />
+            <SignUp />
         </div>
     )
 }
