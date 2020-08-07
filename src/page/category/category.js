@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from 'react-redux';
 
 import CollectionItem from "../../component/Shop/CollectionItem";
+import { selectCollections } from "../../redux/reducer/shop/shop-selector";
 import "./category.scss";
 
 const CategoryPage = ({match,collections}) => {
@@ -23,8 +24,9 @@ const CategoryPage = ({match,collections}) => {
     )
 }
 
-const mapStateToProps= ({shop:{collections}}) =>({
-    collections,
+const mapStateToProps = state =>({
+    collections:selectCollections(state)
 })
+
 
 export default connect(mapStateToProps)(CategoryPage)

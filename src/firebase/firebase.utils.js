@@ -20,10 +20,12 @@ export const firestore = firebase.firestore();
 
 export const createUserProfileDocument = async (userAuth, addtionalData) => {
     if(!userAuth)   return;
-    const userRef=firestore.doc(`/user/${userAuth.uid}`);
-    const snapShot=await userRef.get();
-    //const collectionRef=firestore.collections("/user");
-    //const querySnapShot=await collectionRef.add({cat:true}).get();
+    const userRef=firestore.doc(`/user/${userAuth.uid}`);            //document reference
+    const snapShot=await userRef.get();                              //document snapshot
+    //const collectionRef=firestore.collection("user");            //collection reference
+    //onst querySnapShot=await collectionRef.get(); //collection snapshot or Query Snapshot
+    //console.log({querySnapShot})
+    //console.log({collection:querySnapShot.docs.map(doc => doc.data())});
     if(!snapShot.exists){
         const {displayName, email} =userAuth;
         const createAt = new Date();

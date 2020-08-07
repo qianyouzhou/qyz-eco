@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import Collection from "../Shop/Collection";
+import { selectCollections } from "../../redux/reducer/shop/shop-selector";
 import "./collections-overview.scss"
 
 const CollectionsOverview = ({collections}) => (
@@ -17,8 +18,8 @@ const CollectionsOverview = ({collections}) => (
     </div>
 )
 
-const mapStateToProps = ({shop:{collections}}) =>({
-    collections
+const mapStateToProps = state =>({
+    collections:selectCollections(state)
 })
 
 export default connect(mapStateToProps)(CollectionsOverview);

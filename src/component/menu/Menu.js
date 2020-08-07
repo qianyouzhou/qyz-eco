@@ -1,8 +1,9 @@
 import React from "react";
 import { connect } from 'react-redux';
 
-import './menu.scss';
 import MenuItem from './MenuItem';
+import { selectDirectorySections } from "../../redux/reducer/directory/directory-selector";
+import './menu.scss';
 
 const Menu =({sections})=>(
     <div className="menu">
@@ -17,8 +18,8 @@ const Menu =({sections})=>(
     </div>
 )
 
-const mapStateToProps = ({directory:{sections}}) => ({
-    sections
+const mapStateToProps = state => ({
+    sections:selectDirectorySections(state)
 })
 
 export default connect(mapStateToProps)(Menu);

@@ -5,7 +5,7 @@ import "./collection.scss"
 const Collection=({title,id,items})=>{
     return(
         <div className="collection-page">
-            <div>{title}</div>
+            <div>{title.toUpperCase()}</div>
             <div className="collection">
             {
                 items
