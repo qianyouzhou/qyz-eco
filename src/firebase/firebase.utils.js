@@ -40,9 +40,40 @@ export const createUserProfileDocument = async (userAuth, addtionalData) => {
             console.log('error while creating user' ,error.message);
         }
     }
-    console.log(snapShot);
+    //console.log(snapShot);
     return userRef;
 }
+
+/*
+export const addCollectionAndItems = async ( collectionKey,objectsToAdd ) => {
+    const collectionRef = firestore.collection(collectionKey);
+    const batch=firestore.batch();
+    objectsToAdd.forEach(obj => {
+        const newDocRef=collectionRef.doc();;
+        batch.set(newDocRef,obj)
+    });
+    return await batch.commit();
+}*/
+//活化石，和上面以前总结了document reference，document snapshot，collection reference，collection snapshot
+//之间的关系以及怎么得到
+
+export const convertCollectionsSnapshotToMap = collections => {
+    const transformedCollection = collections.docs.map(doc => {
+      const { title, items } = doc.data();
+  
+      return {
+        routeName: encodeURI(title.toLowerCase()),
+        id: doc.id,
+        title,
+        items
+      };
+    });
+  
+    return transformedCollection.reduce((accumulator, collection) => {
+      accumulator[collection.title.toLowerCase()] = collection;
+      return accumulator;
+    }, {});
+  };
 
 const provider = new firebase.auth.GoogleAuthProvider();
 provider.setCustomParameters({ prompt : 'select_account' });

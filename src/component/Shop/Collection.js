@@ -10,16 +10,13 @@ const Collection=({title,id,items})=>{
             {
                 items
                 .filter((item,index)=>index<4)
-                .map(item=>{
-                    item.id=`${id}.${item.id}`;
-                    //console.log(item.id);
-                return(
+                .map(item=>(
                     <CollectionItem
                         key={item.id} 
                         item={item}
                     />
                 )
-                })
+                )
             }
             </div>
         </div>

@@ -2,20 +2,17 @@ import React from "react";
 import { connect } from 'react-redux';
 
 import CollectionItem from "../../component/Shop/CollectionItem";
-import { selectCollections } from "../../redux/reducer/shop/shop-selector";
+import { selectCollection } from "../../redux/reducer/shop/shop-selector";
 import "./category.scss";
 
-const CategoryPage = ({match,collections}) => {
-    //const {items,title}=collections;
-    //alert(collections.title);
-    let collection=collections.filter(col=>(col.routeName===`${match.params.categoryId}`))
-    console.log(typeof collection[0])
+const CategoryPage = ({collection}) => {
+    const {items,title}=collection;
     return(
         <div className="category-page">
-            <h2 className="title">{collection[0].title}</h2>
+            <h2 className="title">{title}</h2>
             <div className="items">
                 { 
-                    collection[0].items.map(item => (
+                    items.map(item => (
                         <CollectionItem key={item.id} item={item} />
                     ))
                 }
@@ -24,9 +21,8 @@ const CategoryPage = ({match,collections}) => {
     )
 }
 
-const mapStateToProps = state =>({
-    collections:selectCollections(state)
-})
-
+const mapStateToProps = (state, ownProps) => ({
+    collection: selectCollection(ownProps.match.params.categoryId)(state)
+  });  
 
 export default connect(mapStateToProps)(CategoryPage)

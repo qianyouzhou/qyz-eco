@@ -12,9 +12,11 @@ import Header from "./component/header/Header";
 import SignInPage from "./page/signin/SignInPage";
 import CheckoutPage from "./page/checkout/checkout"
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
+//上面最后一个 要删
 import setCurrentUser from "./redux/action/user-action";
 import { selectCurrentUser } from "./redux/reducer/user/user-selector";
-
+//import { selectCollectionsForMIHUO } from "./redux/reducer/shop/shop-selector";
+//要删
 
 class App extends React.Component {
   unsubscribeFromAuth=null;
@@ -33,7 +35,7 @@ class App extends React.Component {
         })
       }
       setCurrentUser(userAuth);
-      console.log(userAuth)
+      //addCollectionAndItems('collections',collectionsArray.map(({title,items})=>({title,items})));
     })
   }
 
@@ -59,6 +61,7 @@ class App extends React.Component {
 
 const mapStateToProps = createStructuredSelector ({
   currentUser:selectCurrentUser
+  //collectionsArray:selectCollectionsForMIHUO// 要删
 })
 
 const mapDispatchToProps = dispatch => ({
