@@ -6,6 +6,9 @@ import { selectCollection } from "../../redux/reducer/shop/shop-selector";
 import "./category.scss";
 
 const CategoryPage = ({collection}) => {
+    console.log("1")
+    console.log(collection)
+    console.log("1")
     const {items,title}=collection;
     return(
         <div className="category-page">

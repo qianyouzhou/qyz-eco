@@ -6,7 +6,8 @@ import Collection from "../Shop/Collection";
 import { selectCollectionsForPreview } from "../../redux/reducer/shop/shop-selector";
 import "./collections-overview.scss"
 
-const CollectionsOverview = ({collections}) => (
+const CollectionsOverview = ({collections}) => 
+(
     <div className="collections-overview">
         {console.log(collections)}
         {

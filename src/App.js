@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ useEffect } from 'react';
 import { Switch, Route, Redirect} from "react-router-dom";
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -11,18 +11,13 @@ import ShopPage from "./page/shop/ShopPage";
 import Header from "./component/header/Header";
 import SignInPage from "./page/signin/SignInPage";
 import CheckoutPage from "./page/checkout/checkout"
-import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
-//上面最后一个 要删
-import setCurrentUser from "./redux/action/user-action";
 import { selectCurrentUser } from "./redux/reducer/user/user-selector";
+import { checkUserSession } from "./redux/action/user-action";
 //import { selectCollectionsForMIHUO } from "./redux/reducer/shop/shop-selector";
 //要删
 
-class App extends React.Component {
-  unsubscribeFromAuth=null;
-
-  componentDidMount(){
-
+const App = ({ checkUserSession, currentUser }) => {
+  /*
     const { setCurrentUser } = this.props;
     this.unsubscribeFromAuth=auth.onAuthStateChanged(async userAuth=>{
       if(userAuth){
@@ -36,14 +31,11 @@ class App extends React.Component {
       }
       setCurrentUser(userAuth);
       //addCollectionAndItems('collections',collectionsArray.map(({title,items})=>({title,items})));
-    })
-  }
+    })*/
+  useEffect(()=>{
+    checkUserSession()
+  },[checkUserSession])
 
-  componentWillUnmount(){
-    this.unsubscribeFromAuth();
-  }
-
-  render(){
   return (
     <div >
         <Header/>
@@ -52,11 +44,11 @@ class App extends React.Component {
           <Route exact path="/hats" component={HatsPage} />
           <Route path="/hats/:hatid" component={HatsDetail} />
           <Route path="/shop" component={ShopPage} />
-          <Route exact path="/signin" render={()=>this.props.currentUser?(<Redirect to='/' />):(<SignInPage />)} />
+          <Route exact path="/signin" render={()=>currentUser?(<Redirect to='/' />):(<SignInPage />)} />
           <Route exact path="/checkout" component={CheckoutPage} />
         </Switch>
     </div>
-  );}
+  );
 }
 
 const mapStateToProps = createStructuredSelector ({
@@ -65,7 +57,7 @@ const mapStateToProps = createStructuredSelector ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  setCurrentUser:user => dispatch(setCurrentUser(user))
+  checkUserSession: ()=>dispatch(checkUserSession ())
 });
 
 export default connect(mapStateToProps,mapDispatchToProps)(App);
