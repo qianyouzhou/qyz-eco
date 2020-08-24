@@ -27,27 +27,50 @@ export const createUserProfileDocument = async (userAuth, addtionalData) => {
     //console.log({querySnapShot})
     //console.log({collection:querySnapShot.docs.map(doc => doc.data())});
     if(!snapShot.exists){
-        const {email,displayName} =userAuth;
+        const email=userAuth.email;
         const createAt = new Date();
+        const password=addtionalData.password;
+        const displayName=addtionalData.displayName;
         try{
-            /*await userRef.set({
-                displayName:addtionalData.displayName,
-                email,
-                password:addtionalData.password,
-                createAt,
-                ...addtionalData
-            })*/
             await userRef.set({
                 displayName,
                 email,
                 createAt,
+                password,
                 ...addtionalData
             })
         }catch(error){
             console.log('error while creating user' ,error.message);
         }
     }
-    //console.log(snapShot);
+    return userRef;
+}
+
+export const updateUserProfileDocument = async (userAuth, addtionalData) => {
+    if(!userAuth)   return;
+    const userRef=firestore.doc(`/user/${userAuth.uid}`);            //document reference
+    const snapShot=await userRef.get();                              //document snapshot
+    //const collectionRef=firestore.collection("user");            //collection reference
+    //onst querySnapShot=await collectionRef.get(); //collection snapshot or Query Snapshot
+    //console.log({querySnapShot})
+    //console.log({collection:querySnapShot.docs.map(doc => doc.data())});
+    if(!snapShot.exists){
+        const email=userAuth.email;
+        const createAt = new Date();
+        const password=addtionalData.password;
+        const displayName=addtionalData.displayName;
+        try{
+            await userRef.set({
+                displayName,
+                email,
+                createAt,
+                password,
+                ...addtionalData
+            })
+        }catch(error){
+            console.log('error while creating user' ,error.message);
+        }
+    }
     return userRef;
 }
 

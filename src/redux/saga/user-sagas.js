@@ -3,6 +3,7 @@ import { takeLatest, call, put, all } from 'redux-saga/effects';
 import { signinSuccess, signinFail, signOutSuccess, signOutFail, signUpSuccess, signUpFail } from "../action/user-action"
 import { createUserProfileDocument, googleProvider, auth, getCurrentUser } from "../../firebase/firebase.utils";
 import UserActionTypes from "../reducer/user/user-type";
+import CartActionTypes from "../reducer/cart/cart-type";
 
 export function* getSnapshotFromUserAuth(userAuth,addtionalData){
     try{
@@ -44,14 +45,16 @@ export function* signOut(){
 export function* signUp({payload:{ email, password, displayName}}){
     try{
         const {user}=yield auth.createUserWithEmailAndPassword(email,password);
-        yield put(signUpSuccess({user,addtionalData:{displayName}}));
+        const additionalData={password, displayName}
+        yield put(signUpSuccess({user,additionalData}));
     }catch(error){
         yield put(signUpFail(error));
     }
 }
 
-export function* signInAfterSignUp({payload:{user,addtionalData}}){
-    yield getSnapshotFromUserAuth(user,addtionalData)
+export function* signInAfterSignUp({payload:{user,additionalData}}){
+    console.log(user,additionalData)
+    yield getSnapshotFromUserAuth(user,additionalData)
 }
 
 export function* isUserAuthenticated(){
