@@ -32,7 +32,6 @@ const Header=({currentUser,hidden,signOutStart})=>{
                 <Link to='/' className="option"> 
                     CONTACT
                 </Link>
-                {console.log(currentUser)}
                 {currentUser ? (
                     <div className='option' onClick={signOutStart}>
                     SIGN OUT

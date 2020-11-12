@@ -9,6 +9,7 @@ import HatsPage from "./component/Hats/HatsPage";
 import HatsDetail from "./component/Hats/HatsDetail";
 import ShopPage from "./page/shop/ShopPage";
 import Header from "./component/header/Header";
+import Footer from "./component/footer/footer";
 import SignInPage from "./page/signin/SignInPage";
 import CheckoutPage from "./page/checkout/checkout"
 import { selectCurrentUser } from "./redux/reducer/user/user-selector";
@@ -31,13 +32,14 @@ const App = ({ checkUserSession, currentUser }) => {
       }
       setCurrentUser(userAuth);
       //addCollectionAndItems('collections',collectionsArray.map(({title,items})=>({title,items})));
-    })*/
+    })
   useEffect(()=>{
     checkUserSession()
-  },[checkUserSession])
+  },[checkUserSession])*/
 
   return (
     <div >
+      
         <Header/>
         <Switch>
           <Route exact path="/" component={HomePage} />
@@ -47,6 +49,7 @@ const App = ({ checkUserSession, currentUser }) => {
           <Route exact path="/signin" render={()=>currentUser?(<Redirect to='/' />):(<SignInPage />)} />
           <Route exact path="/checkout" component={CheckoutPage} />
         </Switch>
+        <Footer/>
     </div>
   );
 }

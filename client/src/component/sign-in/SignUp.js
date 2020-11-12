@@ -1,5 +1,6 @@
 import React,{ useState } from 'react';
 import { connect } from 'react-redux';
+import {useForm} from 'react-hook-form';
 
 import FormInput from "../form-input/form-input";
 import CustomButton from "../form-input/custom-button";
@@ -15,13 +16,16 @@ const SignUp = ({signUpStart}) => {
             confirmPassword:''
         });
         const { displayName, email, password, confirmPassword } = userCredentials;
+        const emailPattern=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        const passwordPattern = /^\d{6,}$/ ;
+        const {register,errors,handleSubmit}=useForm({
+            mode:"onBlur",
+            reValidateMode:"onSubmit"
+        });
 
-    const handleSubmit = async event => {
+        const onSubmit =async (data,event)=>{
         event.preventDefault();
-        if(password!==confirmPassword){
-            alert("password doesn't match");
-            return;
-        }
+        console.log("data"+data);
         signUpStart({email, password, displayName});
 
     }
@@ -35,7 +39,7 @@ const SignUp = ({signUpStart}) => {
         <div className="sign-up">
             <h2 className="title">I do not have a account</h2>
             <span>Sign up with your email and password</span>
-            <form className="sign-up-form" onSubmit={handleSubmit}>
+            <form className="sign-up-form" onSubmit={handleSubmit(onSubmit)}>
                 <FormInput
                     type="text" 
                     name="displayName" 
@@ -50,16 +54,45 @@ const SignUp = ({signUpStart}) => {
                     value={email} 
                     handleChange={handleChange}
                     label="Email"
-                    required 
+                    ref={register({
+                        required:{
+                            value:true,
+                            message:"Email must not be empty"
+                        },
+                        minLength:{
+                            value:3,
+                            message:'Email address must longer than 3'
+                        },
+                        pattern: {
+                            value: emailPattern,
+                            message: (                        
+                                "Email must be a valid email address"
+                            ),
+                          },
+                        
+                    })}
                 />
+                    {errors.email&&<p className="sign-in-error">{errors.email.message}</p>}
                 <FormInput
                     type="password" 
                     name="password" 
                     value={password} 
                     handleChange={handleChange}
                     label="Password"
-                    required 
+                    ref={register({
+                        required:{
+                            value:true,
+                            message:"Password must not be empty"
+                        },
+                        pattern: {
+                            value: passwordPattern,
+                            message: (                        
+                                "Password must contain at least 1 Upper case and 1 special character"
+                            ),
+                          }
+                    })}
                 />
+                    {errors.password&&<p className="sign-in-error">{errors.password.message}</p>}
                 <FormInput
                     type="password" 
                     name="confirmPassword" 
